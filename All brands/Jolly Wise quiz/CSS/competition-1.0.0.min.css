@@ -1,0 +1,55 @@
+/* Custom CSS for Walt Disney Travel Company v1.0.0 */
+#jollyWiseQuizRoundOne { margin-bottom: 20px; }
+#jollyWiseQuiz { padding: 0px 20px; }
+#jollyWiseQuiz h2, #jollyWiseQuiz #heading p, #jollyWiseQuiz #controls p, #jollyWiseQuiz #progressBarImgs, #progressBarTicks span, #jollyWiseQuiz #nextButton  { float: left; }
+#jollyWiseQuiz #bodyOfQuiz, #jollyWiseQuiz #answers, #jollyWiseQuiz #controls { clear: left; }
+
+#jollyWiseQuiz #heading p { margin-top: 10px; padding-left: 10px; line-height: 15px; }
+#jollyWiseQuiz #heading h2, #jollyWiseQuiz h3 strong  { font-family:"Avenir Heavy"!important; }
+#jollyWiseQuiz #heading h2 > strong { font-family:"Avenir Heavy"!important; color: #1994d7; }
+#jollyWiseQuiz h3 { width: 570px; }
+
+#jollyWiseQuiz #answers, #jollyWiseQuiz #controls, #jollyWiseQuiz #controls p { margin-top: 10px; }
+#jollyWiseQuiz #answers span.button, #jollyWiseQuiz #answers input.button { background-color: #1994d7; transition: background 250ms ease-out 0s; }
+#jollyWiseQuiz #answers .button:hover { background-color: #51a8d6; }
+
+#jollyWiseQuiz #progressBarTicks span { width: 24px; height: 24px; border-radius: 20px; text-align: center; color: white; font-size: 21px; }
+#jollyWiseQuiz #progressBarTicks p { margin-top: 7px; }
+#jollyWiseQuiz #controls p { margin-left: 2px; margin-right: 10px; }
+#jollyWiseQuiz #nextButton input.button { width: 100px; }
+#jollyWiseQuiz .clickDisabled { cursor: default; }
+
+/* for JS */
+#jollyWiseQuiz .usersSelectedAnswer { background-color: #61c3f7!important; }
+#jollyWiseQuiz .correctAnswer { background-color: #6fa623!important; }
+#jollyWiseQuiz .incorrectAnswer { background-color: #fb2e1f; }
+
+
+/* html entity tick - styling for FF */
+@-moz-document url-prefix() { 
+	#jollyWiseQuiz #progressBarTicks span { font-size: 30px!important; }
+	#jollyWiseQuiz #progressBarTicks p { margin-top: 5px; }	
+}
+/* /For FF */
+
+/* quiz round specific css */
+#jollyWiseQuiz-one, #jollyWiseQuiz-two, #jollyWiseQuiz-three { margin-bottom: 10px; }
+#jollyWiseQuiz-one #answers { margin-left: -10px; }
+#jollyWiseQuiz-one #answers span.button, #jollyWiseQuiz-one #answers input.button { width: 100px; }
+#jollyWiseQuiz-one #nextButton { margin-left: 120px; }
+
+#jollyWiseQuiz-two #answers { width: 650px; margin-left: -98px; }
+#jollyWiseQuiz-two #answers span, #jollyWiseQuiz-three #answers span { margin-bottom: 10px; }
+#jollyWiseQuiz-two #nextButton { margin-left: 201px; }
+#jollyWiseQuiz-two #answers #button-one, #jollyWiseQuiz-two #answers #button-two { width: 260px; }
+#jollyWiseQuiz-two #answers #button-three, #jollyWiseQuiz-two #answers #button-four, #jollyWiseQuiz-two #answers #button-five { width: 167px; }
+
+#jollyWiseQuiz-three #answers #button-one, #jollyWiseQuiz-three #answers #button-two, #jollyWiseQuiz-three #answers #button-three, #jollyWiseQuiz-three #answers #button-four, #jollyWiseQuiz-three #answers #button-five { width: 279px; }
+#jollyWiseQuiz-three #answers { width: 605px; margin-left: -19px; }
+#jollyWiseQuiz-three #nextButton { margin-left: 234px; }
+
+#jollyWiseQuizImage { position: absolute; }
+#jollyWiseQuiz-one #jollyWiseQuizImage { top: -38px; left: 587px; }
+#jollyWiseQuiz-two #jollyWiseQuizImage { top: -59px; left: 642px; }
+#jollyWiseQuiz-three #jollyWiseQuizImage { top: -63px; left: 614px; }
+

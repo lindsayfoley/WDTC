@@ -1,0 +1,136 @@
+<style type="text/css">
+
+body { position: relative; }
+#viewersPopup { width: 320px; height: 50px; position: fixed; bottom: 15px; right: 15px; background-color: rgba(255, 255, 255, 0.7); border: 1px solid gray; border-radius: 10px; box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); display: none;  z-index: 98; }	
+#viewersPopup p { text-align: center; padding-top: 14px; }
+	
+</style>
+
+<div id="viewersPopup">
+	<p><span></span> viewing this resort right now</p>
+</div>
+
+
+<script>
+	
+var SessionCookieSetter = {
+	
+	cookieKey: "pageIdsWherePopupHasBeenSeen",
+	
+	run: function() {
+		
+		var dataId = SessionCookieSetter.getUrlId();
+		var myCookieData = SessionCookieSetter.readCookie(SessionCookieSetter.cookieKey);
+		var idIsStored = SessionCookieSetter.doesCookieDataContainUrlId(dataId, myCookieData);
+		var totalPax = ViewingResortAdder.generateNumberOfUsersForCurrentTime();
+			
+		if(!idIsStored && totalPax >= 1) {
+			ViewingResortAdder.showUsersDivOnOfferPage();
+		}
+		
+		var accessPopupText = vwo_$('#viewersPopup p span');
+		var person = totalPax + " Person is";
+		var people = totalPax + " People are";
+		
+		var addUserInfo = (totalPax === 1) ? vwo_$(accessPopupText).text(person) : vwo_$(accessPopupText).text(people);
+				
+		var updatedCookieData = SessionCookieSetter.addNewPageIdToCookieDataIfNotFoundPreviously(dataId, myCookieData);
+
+		SessionCookieSetter.setCookie(SessionCookieSetter.cookieKey, updatedCookieData);
+		
+	},
+	
+	getUrlId: function() {
+				
+		return vwo_$('#body .deal').attr('data-id');
+
+	},
+	
+	doesCookieDataContainUrlId: function(urlId, cookieData) {
+		
+		if(cookieData === null || urlId === "") {
+			return false;
+		}
+		
+		var indexOfUrlIdWithinCookieDataString = cookieData.indexOf(urlId);
+		
+		return (indexOfUrlIdWithinCookieDataString >= 0);
+	},
+	
+	
+	addNewPageIdToCookieDataIfNotFoundPreviously: function(urlId, cookieData) {
+		
+		if(cookieData === null || cookieData === "") {
+			return urlId;
+		}
+		
+		var pageIdWasFoundPreviously = SessionCookieSetter.doesCookieDataContainUrlId(urlId, cookieData);
+		
+		if(!pageIdWasFoundPreviously && urlId != "") {
+			cookieData = cookieData + "," + urlId;
+		} 
+		
+		return cookieData;	
+	},
+	
+	setCookie: function(cookieName, cookieValue) {
+		
+		document.cookie = cookieName + "=" + cookieValue + "; path=/";
+	
+	},
+		
+	readCookie: function(cookieName) { 
+		var nameEquals = cookieName + "=";
+		var cookieArray = document.cookie.split(';');
+			
+		for(var i=0; i < cookieArray.length; i++) {
+			var cookie = cookieArray[i];
+			
+			while (cookie.charAt(0)==' '){ 
+				cookie = cookie.substring(1,cookie.length);
+			}
+			
+			if (cookie.indexOf(nameEquals) == 0) {
+				 return cookie.substring(nameEquals.length,cookie.length);
+			}
+		}
+		return null;
+	}
+}
+	 
+	
+var ViewingResortAdder = {
+	
+	generateNumberOfUsersForCurrentTime: function() {
+		
+		var today = new Date();
+		var timeOfDay = today.getHours();
+		
+		if(timeOfDay >= 13 && timeOfDay <= 14 || timeOfDay >= 20 && timeOfDay <= 22) {
+			return Math.floor((Math.random() * 5) + 1); // lunch hours & night hours
+			
+		} else if(timeOfDay >= 23 && timeOfDay <= 7) { 
+			return Math.floor((Math.random() * 1) + 0.5); // night hours
+			
+		} else  {
+			return Math.floor((Math.random() * 3) + 1);
+		}
+	},
+	
+	showUsersDivOnOfferPage: function() {
+		
+		var offerDiv = "<div id='viewersPopup'><p><span></span> viewing this deal right now</p></div>";
+		
+		vwo_$('#body .container').prepend(offerDiv);
+		vwo_$('#viewersPopup').delay(200).fadeIn(2000).delay(3000).fadeOut("slow");
+		
+	}
+};	
+
+
+$(function() {	
+	SessionCookieSetter.run();
+});
+
+	
+</script>
